@@ -46,7 +46,7 @@ class CompShortcut extends Command {
 async function startPartyCreation(bot: Bot, message: Message, args: string[]) {
 
     let comp = undefined;
-    if(args.length > 0) { comp = Party.COMPS[args[0].toUpperCase()]; }
+    if(args.length > 0) { comp = Party.COPY_COMP(Party.COMPS[args[0].toUpperCase()]); }
 
     await getDmLock(message.author).runExclusive(async () => {
         try {
@@ -68,7 +68,7 @@ async function startPartyCreation(bot: Bot, message: Message, args: string[]) {
             if(!comp) {
                 comp = await askInDm(message.author, msgs.askComp, isComp);
                 if(Party.COMPS[comp.toUpperCase()] !== undefined) {
-                    comp = Party.COMPS[comp.toUpperCase()]
+                    comp = Party.COPY_COMP(Party.COMPS[comp.toUpperCase()]);
                 } else {
                     comp = comp.split(/\s+/).map(e => parseInt(e, 10));
                     let max = comp.reduce((a, b) => a + b);

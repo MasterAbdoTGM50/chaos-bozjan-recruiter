@@ -21,7 +21,7 @@ export = class CompCommand extends Command {
                     try {
                         let comp: any = await askInDm(message.author, msgs.askComp, isComp);
                         if(Party.COMPS[comp.toUpperCase()] !== undefined) {
-                            comp = Party.COMPS[comp.toUpperCase()]
+                            comp = Party.COPY_COMP(Party.COMPS[comp.toUpperCase()]);
                         } else {
                             comp = comp.split(/\s+/).map(e => parseInt(e, 10));
                             let max = comp.reduce((a, b) => a + b);

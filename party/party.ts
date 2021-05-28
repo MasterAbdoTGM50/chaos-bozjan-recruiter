@@ -28,6 +28,10 @@ export class Party implements IDirty {
         P24 : { max: 24, tank: 3 , healer: 6 , ranged: 0, melee: 0, caster: 0, dps: 15 },
     }
 
+    public static COPY_COMP(comp: any) {
+        return { max: comp.max, tank: comp.tank, healer: comp.healer, ranged: comp.ranged, melee: comp.melee, caster: comp.caster, dps: comp.dps };
+    }
+
     public static reviver(key: any, val: any): any {
         if(typeof val === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(val)) {
             return new Date(val);

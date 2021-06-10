@@ -5,8 +5,9 @@ import { Mutex } from "async-mutex";
 import { MS, S } from "./time";
 
 import { msgs, roles } from "../lib.json";
-import { emojis, lRole } from "../guild.json";
+import { emojis, lRole, hRole } from "../guild.json";
 import { Party } from "../party/party";
+import {toMiniNickname} from "./nickname";
 
 const WAIT = 5 * S * MS
 
@@ -61,7 +62,20 @@ export function islRole(bot: Bot): (inp: string) => boolean {
     return (inp: string): boolean => {
         if(inp.toLowerCase() === "none") { return true; }
         return  bot.guild.roles.cache.find(r => r.name.toLowerCase() === lRole)
-            .members.some(m => m.displayName.toLowerCase().includes(inp.toLowerCase()));
+            .members.some(m => toMiniNickname(m.displayName).toLowerCase().includes(inp.toLowerCase()));
+    }
+}
+
+export function islhRole(bot: Bot): (inp: string) => boolean {
+    return (inp: string): boolean => {
+        if(inp.toLowerCase() === "none") { return true; }
+
+        let leads = bot.guild.roles.cache.find(r => r.name.toLowerCase() === lRole)
+            .members.some(m => toMiniNickname(m.displayName).toLowerCase().includes(inp.toLowerCase()));
+        let coleads = bot.guild.roles.cache.find(r => r.name.toLowerCase() === hRole)
+            .members.some(m => toMiniNickname(m.displayName).toLowerCase().includes(inp.toLowerCase()));
+
+        return leads || coleads;
     }
 }
 

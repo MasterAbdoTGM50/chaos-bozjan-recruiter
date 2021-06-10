@@ -1,13 +1,14 @@
 import {Command, CommandHandler} from "../../handlers/command";
 import { Bot } from "../../bot";
 import { Message } from "discord.js";
-import { askInDm, getDmLock, isComp, isDur, islRole, isGuildRole, isPartyRole } from "../../utils/dm";
+import {askInDm, getDmLock, isComp, isDur, islRole, isGuildRole, isPartyRole, islhRole} from "../../utils/dm";
 import { isDate, parseDate } from "../../utils/time";
 
-import { lRole } from "../../guild.json";
+import { lRole, hRole } from "../../guild.json";
 import { msgs } from "../../lib.json";
 import { Party } from "../../party/party";
 import { buildPartyEmbed } from "../../party/party-utils";
+import {toMiniNickname} from "../../utils/nickname";
 
 class PartyCommand extends Command {
 
@@ -53,11 +54,15 @@ async function startPartyCreation(bot: Bot, message: Message, args: string[]) {
             let title = await askInDm(message.author, msgs.askTitle);
             let description = await askInDm(message.author, msgs.askDescription);
 
-            let clName = await askInDm(message.author, msgs.askCoLeader, islRole(bot));
+            let clName = await askInDm(message.author, msgs.askCoLeader, islhRole(bot));
             let coleader = null;
             if(clName.toLowerCase() !== "none") {
                 let clMember = bot.guild.roles.cache.find(r => r.name.toLowerCase() === lRole)
-                    .members.find(m => m.displayName.toLowerCase().includes(clName.toLowerCase()));
+                    .members.find(m => toMiniNickname(m.displayName).toLowerCase().includes(clName.toLowerCase()));
+                if(clMember === undefined) {
+                    clMember = bot.guild.roles.cache.find(r => r.name.toLowerCase() === hRole)
+                        .members.find(m => toMiniNickname(m.displayName).toLowerCase().includes(clName.toLowerCase()));
+                }
                 coleader = { id: clMember.id, name: clMember.displayName };
             }
 

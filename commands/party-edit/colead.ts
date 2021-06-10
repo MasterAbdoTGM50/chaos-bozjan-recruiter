@@ -3,12 +3,12 @@ import { Bot } from "../../bot";
 import { Message } from "discord.js";
 import { updatePartyMsg } from "../../party/party-utils";
 
-import { lRole, emojis } from "../../guild.json";
+import { lRole, hRole, emojis } from "../../guild.json";
 
 export = class ColeadCommand extends Command {
 
     aliases: string[] = ["colead"];
-    roles: string[] = [lRole];
+    roles: string[] = [lRole, hRole];
 
     async handle(bot: Bot, message: Message, args: string[]) {
         if(args.length >= 1) {

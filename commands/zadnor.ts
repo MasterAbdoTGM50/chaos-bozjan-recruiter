@@ -5,9 +5,9 @@ import { MS, S, toFormattedTimeStr } from "../utils/time";
 
 import { emojis } from "../guild.json";
 
-export = class ForecastCommand extends Command {
+export = class ZadnorForecastCommand extends Command {
 
-    aliases: string[] = [ "forecast", "weather" ];
+    aliases: string[] = [ "zadnor" ];
     roles: string[] = null;
 
     handle(bot: Bot, message: Message, args: string[]) {
@@ -92,11 +92,11 @@ interface IForecast {
 
 function forecast(date: Date): string {
     let chance = calculateForecastTarget(date);
-    if (chance < 52) { return `Fair`; }
-    if (chance < 64) { return `Rain`; }
-    if (chance < 76) { return `Wind`; }
-    if (chance < 88) { return `Thunder`; }
-    return `Dust`;
+    if (chance < 60) { return `Fair`; }
+    if (chance < 70) { return `Rain`; }
+    if (chance < 80) { return `Wind`; }
+    if (chance < 90) { return `Thunder`; }
+    return `Snow`;
 }
 
 function calculateForecastTarget(date: Date): number {
@@ -121,7 +121,7 @@ function calculateForecastTarget(date: Date): number {
 }
 
 function buildForecastEmbed(forecasts: IForecast[], page= 1) {
-    let embed = new MessageEmbed().setTitle(`Bozjan Weather Forecast #${page}`).setColor("ORANGE");
+    let embed = new MessageEmbed().setTitle(`Zadnor Weather Forecast #${page}`).setColor("ORANGE");
 
     let start = (page - 1) * 24;
     let end = Math.min(forecasts.length, page * 24);

@@ -15,8 +15,8 @@ export = class HelpCommand extends Command {
         embed.setDescription("Until daddy is competent enough to create an actual help functionality, I hope this will suffice");
 
         let weatherDesc = "";
-        weatherDesc += `\`!cbr weather {LOOKAHED_DURATION}\``;
-        weatherDesc += `\n\ndisplays bozja weather for \`{LOOKAHED_DURATION}\` upto 48 hours.`;
+        weatherDesc += `\`!cbr {bozja/zadnor} {LOOKAHED_DURATION}\``;
+        weatherDesc += `\n\ndisplays {bozja/zadnor} weather for \`{LOOKAHED_DURATION}\` upto 48 hours.`;
         weatherDesc += `\nIf not specified, \`{LOOKAHED_DURATION}\` is 24 by default`;
 
         embed.addField("Weather Forecast", weatherDesc);

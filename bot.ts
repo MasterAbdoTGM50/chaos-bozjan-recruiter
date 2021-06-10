@@ -1,10 +1,10 @@
-import {Client, Guild, Message} from "discord.js";
-import { Party } from "./party/party";
+import { Client, Guild, Message } from "discord.js";
 import { IMessageHandler, ITickHandler } from "./handlers/handler";
 import { MS } from "./utils/time";
 import { DirtyDB } from "./utils/dirtydb";
 import { createPartyReactionHandler } from "./party/party-reactions";
-import {Schedule} from "./party/schedule";
+import { Party } from "./party/party";
+import { Schedule } from "./party/schedule";
 
 import path from "path";
 

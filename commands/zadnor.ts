@@ -1,7 +1,7 @@
 import { Command } from "../handlers/command";
 import { Bot } from "../bot";
 import { Message, MessageEmbed, MessageReaction, User } from "discord.js";
-import { MS, S, toFormattedTimeStr } from "../utils/time";
+import {MS, parseDate, S, toFormattedTimeStr} from "../utils/time";
 
 import { emojis } from "../guild.json";
 
@@ -15,7 +15,7 @@ export = class ZadnorForecastCommand extends Command {
         let hours = 24;
         if(args.length >= 1) {
             let num = parseInt(args[0], 10);
-            if(isNaN(num) || num < 1 || num > 48) { message.react(`<:${emojis.confirm}>`).then(); return; }
+            if(isNaN(num) || num < 1) { message.react(`<:${emojis.confirm}>`).then(); return; }
             hours = num;
         }
 
@@ -115,8 +115,8 @@ function calculateForecastTarget(date: Date): number {
     let totalDays = unixSeconds / 4200;
     totalDays = (totalDays << 32) >>> 0; // Convert to uint
     let calcBase = totalDays * 100 + increment;
-    let step1 = (calcBase << 11) ^ calcBase;
-    let step2 = (step1 >>> 8) ^ step1;
+    let step1 = ((calcBase << 11) ^ calcBase) >>> 0;
+    let step2 = ((step1 >>> 8) ^ step1) >>> 0;
     return step2 % 100;
 }
 

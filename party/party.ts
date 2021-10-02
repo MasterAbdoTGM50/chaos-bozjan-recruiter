@@ -21,11 +21,12 @@ export class Party implements IDirty {
     lockouts: { start: Date, dur: number, roles: string[] } [] = [];
 
     public static readonly COMPS = {
-        DRS1: { max: 48, tank: 12, healer: 12, ranged: 6, melee: 6, caster: 6, dps: 6  },
-        DRS2: { max: 48, tank: 8 , healer: 12, ranged: 6, melee: 6, caster: 6, dps: 10 },
-        DRN : { max: 24, tank: 1 , healer: 3 , ranged: 3, melee: 3, caster: 3, dps: 11 },
-        P8  : { max: 8 , tank: 2 , healer: 2 , ranged: 0, melee: 0, caster: 0, dps: 4  },
-        P24 : { max: 24, tank: 3 , healer: 6 , ranged: 0, melee: 0, caster: 0, dps: 15 },
+        DRS1 : { max: 48, tank: 12, healer: 12, ranged: 6, melee: 6, caster: 6, dps: 6  },
+        DRS2 : { max: 48, tank: 8 , healer: 12, ranged: 6, melee: 6, caster: 6, dps: 10 },
+        DRS24: { max: 24, tank: 6 , healer: 6 , ranged: 4, melee: 0, caster: 0, dps: 8  },
+        DRN  : { max: 24, tank: 1 , healer: 3 , ranged: 3, melee: 3, caster: 3, dps: 11 },
+        P8   : { max: 8 , tank: 2 , healer: 2 , ranged: 0, melee: 0, caster: 0, dps: 4  },
+        P24  : { max: 24, tank: 3 , healer: 6 , ranged: 0, melee: 0, caster: 0, dps: 15 },
     }
 
     public static COPY_COMP(comp: any) {
